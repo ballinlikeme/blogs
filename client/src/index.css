@@ -1,13 +1,61 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import-normalize;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --accent-color: #4433FF;
+  --help-color: #F34C4C;
+
+  --font-family: "Open Sans", sans-serif;
+  --bold-font: 700;
+  --semibold-font: 600;
+  --medium-font: 500;
+  --regular-font: 400;
+  --light-font: 300;
+
+  --main-heading-size: 30px;
+  --secondary-heading-size: 18px;
+  --regular-text-size: 15px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body[data-theme="light"] {
+  --background-color: #E2E2E2;
+  --sec-background-color: #FFF;
+  --color-text: #000;
+}
+
+body[data-theme="dark"] {
+  --background-color: #222;
+  --sec-background-color: #4F4F4F;
+  --color-text: #FFF;
+  
+}
+
+body {
+  margin: 0;
+  background-color: var(--background-color);
+  font-family: var(--font-family);
+  font-weight: var(--regular-font);
+  color: var(--color-text);
+}
+
+h1 {
+  font-size: var(--main-heading-size);
+  font-weight: var(--bold-font);
+}
+
+h2,h3,h4,h5,h6 {
+  font-size: var(--secondary-heading-size);
+  font-weight: var(--medium-font);
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  cursor: pointer;
+}
+
+a:visited {
+  text-decoration: none;
 }
