@@ -1,7 +1,12 @@
+import Header from "./components/Header/Header";
+import PageHeading from "./components/Page-heading/PageHeading";
 
 function App() {
   return (
-    <div></div>
+    <>
+      <Header />
+      <PageHeading />
+    </>
   );
 }
 
