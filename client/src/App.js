@@ -1,12 +1,8 @@
-import Header from "./components/Header/Header";
-import PageHeading from "./components/Page-heading/PageHeading";
+import SingleCategoryPage from "./pages/SingleCategoryPage";
 
 function App() {
   return (
-    <>
-      <Header />
-      <PageHeading />
-    </>
+   <SingleCategoryPage />
   );
 }
 

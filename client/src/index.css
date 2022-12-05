@@ -14,7 +14,8 @@
 
   --main-heading-size: 30px;
   --secondary-heading-size: 18px;
-  --regular-text-size: 14px;
+  --regular-text-size: 15px;
+  --logo-text-size: 20px;
 }
 
 body[data-theme="light"] {
@@ -46,7 +47,7 @@ h1 {
 
 h2,h3,h4,h5,h6 {
   font-size: var(--secondary-heading-size);
-  font-weight: var(--medium-font);
+  font-weight: var(--semibold-font);
 }
 
 li {
