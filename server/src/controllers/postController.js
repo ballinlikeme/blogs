@@ -22,11 +22,21 @@ class PostController {
 
     async create(req, res) {
         try {
-            const {title, text, author, UserId} = req.body
-            const post = await postService.create(title, text, author, UserId);
+            const {title, text, author, description, UserId, CategoryId} = req.body
+            const post = await postService.create(title, text, author, description, UserId, CategoryId);
             return res.json(post)
         }catch (e) {
             console.log(e);
+        }
+    }
+
+    async getPostsInCategory(req, res) {
+        try {
+            const {categoryId} = req.body;
+            const posts = await postService.getPostsInCategory(categoryId);
+            return res.json(posts);
+        } catch (e) {
+            console.log(e)
         }
     }
 }

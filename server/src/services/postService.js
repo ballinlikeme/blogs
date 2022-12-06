@@ -12,11 +12,16 @@ class PostService {
         return post;
     }
 
-    async create(title, text, author, UserId) {
+    async create(title, text, author, description, UserId, CategoryId) {
         const candidate = await Posts.findOne({where: {title}})
         if (candidate) throw new Error('Post with this title already exists')
-        const newPost = await Posts.create({title, text, author, UserId})
+        const newPost = await Posts.create({title, text, author, UserId, CategoryId, description})
         return newPost;
+    }
+
+    async getPostsInCategory(categoryId) {
+        const posts = await Posts.findAll({where: {CategoryId: categoryId}});
+        return posts;
     }
 }
 
