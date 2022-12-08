@@ -11,13 +11,13 @@ const PostTileEl = styled.article`
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
 `
 
-const PostTile = () => {
+const PostTile = ({title, description}) => {
     return (
         <PostTileEl>
             <Flex direction={"column"} gap={"14px"}>
-                <h2>Post Title</h2>
+                <h2>{title}</h2>
                 <Description>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi asperiores consequuntur distinctio, labore neque nesciunt obcaecati optio sunt veritatis voluptatibus?
+                    {description}
                 </Description>
                 <PostLink />
             </Flex>
