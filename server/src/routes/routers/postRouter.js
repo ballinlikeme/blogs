@@ -4,7 +4,7 @@ const postController = require('../../controllers/postController')
 
 postRouter.get('/getOne', postController.getOne)
 postRouter.get('/getAll', postController.getAll)
-postRouter.get('/getPostsInCategory', postController.getPostsInCategory)
+postRouter.post('/getPostsInCategory', postController.getPostsInCategory)
 postRouter.post('/create', postController.create)
 
 module.exports = postRouter;

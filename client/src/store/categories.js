@@ -16,8 +16,8 @@ class Categories {
         this.categories = payload;
     }
 
-    setCurrentCategory(name) {
-        this.currentCategory = name;
+    setCurrentCategory(payload) {
+        this.currentCategory = payload;
     }
 
 }

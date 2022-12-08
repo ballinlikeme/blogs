@@ -1,23 +1,37 @@
-import React from "react";
-import styled from "styled-components";
+import React, {useEffect, useState} from "react";
 import Container from "../styles/Container";
+import PageWrapper from "../styles/PageWrapper";
 import HeadLine from "./HeadLine/HeadLine";
 import Publications from "./Publications/Publications";
+import categories from "../../store/categories";
+import {$host} from "../../http/http";
+import {observer} from "mobx-react-lite";
 
-const ContentEl = styled.main`
-    padding: 150px 0 30px;
-    background-color: var(--background-color);
-`
+const Content = observer(() => {
 
-const Content = () => {
+    const [amount, setAmount] = useState(0);
+    const [publications, setPublications] = useState([]);
+
+    const categoryId = categories.currentCategory.id;
+
+    useEffect(() => {
+        $host.post('/posts/getPostsInCategory', {
+            categoryId
+        })
+            .then(result => {
+                setPublications(result.data);
+                setAmount(result.data.length)
+            });
+    }, [categoryId])
+
     return (
-        <ContentEl>
+        <PageWrapper>
             <Container>
-                <HeadLine />
-                <Publications />
+                <HeadLine amount={amount} />
+                <Publications publications={publications} />
             </Container>
-        </ContentEl>
+        </PageWrapper>
     )
-}
+})
 
 export default Content;

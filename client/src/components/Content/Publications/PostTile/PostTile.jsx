@@ -9,13 +9,24 @@ const PostTileEl = styled.article`
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  &:hover h2, &:hover span {
+    color: var(--accent-color);
+  }
 `
+
+const StyledPostTitle = styled.h2`
+  transition: color .2s ease-in;
+`
+
+const PostTitle = ({children}) => {
+    return <StyledPostTitle>{children}</StyledPostTitle>
+}
 
 const PostTile = ({title, description}) => {
     return (
         <PostTileEl>
             <Flex direction={"column"} gap={"14px"}>
-                <h2>{title}</h2>
+                <PostTitle>{title}</PostTitle>
                 <Description>
                     {description}
                 </Description>

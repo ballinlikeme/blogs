@@ -22,13 +22,14 @@ body[data-theme="light"] {
   --background-color: #E2E2E2;
   --sec-background-color: #FFF;
   --color-text: #000;
+  --secondary-color-text: #626262;
 }
 
 body[data-theme="dark"] {
   --background-color: #222;
   --sec-background-color: #4F4F4F;
   --color-text: #FFF;
-  
+  --secondary-color-text: #a1a1a1;
 }
 
 body {

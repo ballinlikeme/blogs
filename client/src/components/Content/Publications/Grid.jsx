@@ -4,7 +4,7 @@ const StyledGrid = styled.div`
   width: 100%;
   height: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(500px, max-content));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 0.5fr));
   gap: 32px;
 `
 

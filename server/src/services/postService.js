@@ -15,7 +15,7 @@ class PostService {
     async create(title, text, author, description, UserId, CategoryId) {
         const candidate = await Posts.findOne({where: {title}})
         if (candidate) throw new Error('Post with this title already exists')
-        const newPost = await Posts.create({title, text, author, UserId, CategoryId, description})
+        const newPost = await Posts.create({title, text, author, UserId, description, CategoryId})
         return newPost;
     }
 

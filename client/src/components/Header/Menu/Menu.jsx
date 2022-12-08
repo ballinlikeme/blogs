@@ -22,10 +22,16 @@ const Menu = observer(() => {
             })
     }, []);
 
+    const changeCategory = (event, name, id) => {
+        event.preventDefault()
+        categories.setCurrentCategory({name, id})
+    }
+
     return (
         <Flex align={"center"} gap={"20px"}>
             {categories.categories.map(category => {
                 return <MenuLink
+                    onClick={(e) => changeCategory(e, category.name, category.id)}
                     current={category.name === currentCategory}
                     key={category.id}>
                         {category.name}

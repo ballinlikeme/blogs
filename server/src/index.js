@@ -3,7 +3,7 @@ require('dotenv').config({
 })
 const express = require('express');
 const cors = require('cors')
-const { Users, Posts } = require('./database/connections');
+const { Users, Posts, Categories } = require('./database/connections');
 const sequelize = require('./database/db');
 const router = require('./routes/router');
 

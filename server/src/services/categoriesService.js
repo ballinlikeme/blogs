@@ -17,7 +17,7 @@ class CategoriesService {
         const candidate = await Categories.findOne({where: {name}});
         if (candidate) throw new Error('category already exists');
         const category = await Categories.create({name});
-        return category;
+        return category
     }
 
 }
