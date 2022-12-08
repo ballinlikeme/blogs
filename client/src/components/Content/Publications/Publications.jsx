@@ -14,8 +14,8 @@ const Publications = observer(() => {
         $host.post('/posts/getPostsInCategory', {
             categoryId
         })
-            .then(result => setPublications(result.data));
-    }, [])
+            .then(result => setPublications(result.data))
+    }, [categoryId]);
 
     return (
         <Grid>
