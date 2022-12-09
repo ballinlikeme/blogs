@@ -1,5 +1,6 @@
 import SingleCategoryPage from "../pages/SingleCategoryPage";
 import SinglePostPage from "../pages/SinglePostPage";
+import AuthPage from "../pages/AuthPage";
 
 const PUBLIC_ROUTES = [
     {
@@ -9,8 +10,18 @@ const PUBLIC_ROUTES = [
     },
     {
         id: 2,
-        path: "/post/:id",
+        path: "post/:id",
         Element: <SinglePostPage />
+    },
+    {
+        id: 3,
+        path: "register",
+        Element: <AuthPage />
+    },
+    {
+        id: 4,
+        path: "login",
+        Element: <AuthPage />
     }
 ]
 

@@ -1,11 +1,11 @@
 import {Route, Routes} from "react-router";
-import {PUBLIC_ROUTES} from "../../utils/constants";
+import {PUBLIC_ROUTES} from "../../utils/routes";
 
 const Router = () => {
     return (
         <Routes>
-            {PUBLIC_ROUTES.map(({ path, Element }) => {
-                return <Route path={path} element={Element} />
+            {PUBLIC_ROUTES.map(({ id, path, Element }) => {
+                return <Route key={id} path={path} element={Element} />
             })}
         </Routes>
     )
