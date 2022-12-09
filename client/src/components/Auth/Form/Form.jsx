@@ -4,12 +4,20 @@ import FormTitle from "./FormTitle";
 import Input from "./Input";
 import Button from "./Button";
 import Text from "./Text";
-import {LOGIN} from "../../../utils/authActions";
+import {LOGIN, REGISTER} from "../../../utils/authActions";
 import {useState} from "react";
+import {useLocation} from "react-router";
 
-const Form = ({action}) => {
+const Form = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const location = useLocation();
+    const action = location.pathname === LOGIN ? LOGIN : REGISTER;
+
+    const submit = async (event) => {
+
+    }
+
     return (
         <FormEl>
             <FormTitle>{action === LOGIN ? "Login" : "Register"}</FormTitle>
