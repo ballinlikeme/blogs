@@ -7,6 +7,7 @@ import Text from "./Text";
 import {LOGIN, REGISTER} from "../../../utils/authActions";
 import {useState} from "react";
 import {useLocation} from "react-router";
+import authService from "../../../services/authService";
 
 const Form = () => {
     const [email, setEmail] = useState('')
@@ -15,7 +16,13 @@ const Form = () => {
     const action = location.pathname === LOGIN ? LOGIN : REGISTER;
 
     const submit = async (event) => {
-
+        event.preventDefault();
+        switch (action) {
+            case LOGIN:
+                return authService.login(email, password);
+            case REGISTER:
+                return authService.register(email, password);
+        }
     }
 
     return (
@@ -33,7 +40,7 @@ const Form = () => {
                 placeholder={"Password"}
                 type={"password"}
             />
-            <Button>{action === LOGIN ? "Login" : "Register"}</Button>
+            <Button handler={submit}>{action === LOGIN ? "Login" : "Register"}</Button>
             <Text>{action === LOGIN ? "Not a member? Register." : "Already have an account? Login."}</Text>
         </FormEl>
     )

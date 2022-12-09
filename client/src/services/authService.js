@@ -10,11 +10,12 @@ class AuthService {
 
     async register(email, password) {
         const response = await $host.post('/users/register', { email, password })
+        localStorage.setItem('token', response.data.token);
         return response.data;
     }
 
     async checkAuth() {
-        const response = await $authHost.get('/user/check')
+        const response = await $authHost.get('/users/check')
         return response;
     }
 }
