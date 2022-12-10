@@ -4,8 +4,8 @@ import jwt_decode from "jwt-decode";
 class AuthService {
     async login(email, password) {
         const response = await $host.post('/users/login', { email, password });
-        localStorage.setItem('token', response.data)
-        return jwt_decode(response.data);
+        localStorage.setItem('token', response.data.token)
+        return jwt_decode(response.data.token);
     }
 
     async register(email, password) {

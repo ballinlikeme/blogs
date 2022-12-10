@@ -4,11 +4,12 @@ import FormTitle from "./FormTitle";
 import Input from "./Input";
 import Button from "./Button";
 import Text from "./Text";
-import {LOGIN, REGISTER} from "../../../utils/authActions";
+import {LOGIN} from "../../../utils/authActions";
 import {useState} from "react";
 import {useLocation, useNavigate} from "react-router";
 import authService from "../../../services/authService";
 import {Link} from "react-router-dom";
+import auth from "../../../store/auth"
 
 const Form = () => {
     const [email, setEmail] = useState('')
@@ -21,7 +22,9 @@ const Form = () => {
     const submit = async (event) => {
         event.preventDefault();
         const user = isLogin ? await authService.login(email, password) : await authService.register(email, password)
-        if (user) navigate("/");
+        console.log(user)
+        auth.authenticate(user);
+        if (user) return navigate("/")
     }
 
     return (

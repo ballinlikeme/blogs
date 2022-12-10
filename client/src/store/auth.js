@@ -17,10 +17,16 @@ class Auth {
         return this._user;
     }
 
+    logout() {
+        this._auth = false;
+        this._user = null;
+        localStorage.delete('token');
+    }
 
     authenticate(payload) {
         this._auth = true;
         this._user = payload;
+        console.log(payload);
     }
 }
 

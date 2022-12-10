@@ -9,18 +9,17 @@ class UserService {
         if (!user) throw ApiError.BadRequest('Invalid email');
         const comparePasswords = await bcrypt.compare(password, user.password)
         if (!comparePasswords) throw ApiError.BadRequest('Invalid password')
-        const token = tokenService.generateAccessToken(email, user.id);
+        const token = tokenService.generateAccessToken(email, user.id, user.role);
         return token;
     }
 
     async register(email, password, role) {
         const candidate = await User.findOne({where: {email}});
-        console.log(candidate);
         if (candidate) throw ApiError.BadRequest('User with this email already exists')
         const hashedPassword = await bcrypt.hash(password, 5);
         const user = await User.create({email, password: hashedPassword, role});
-        const token = tokenService.generateAccessToken(email, user.id);
-        const userData = {id: user.id, email: user.email, role: user.role, token, };
+        const token = tokenService.generateAccessToken(email, user.id, user.role);
+        const userData = {id: user.id, email: user.email, role: user.role, token};
         return userData;
     }
 

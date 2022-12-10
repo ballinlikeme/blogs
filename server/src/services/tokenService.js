@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
 class TokenService {
-    generateAccessToken(email, id) {
-        const payload = {email, id}
+    generateAccessToken(email, id, role) {
+        const payload = {email, id, role}
         const token = jwt.sign(payload, process.env.SECRET_ACCESS_KEY, {
             expiresIn: "24h"
         })

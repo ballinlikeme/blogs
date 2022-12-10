@@ -40,7 +40,7 @@ const Menu = observer(() => {
                     </MenuLink>
             })}
             {auth.getUser()?.role === "ADMIN"
-                ? <Link to="/create"><MenuLink onClick={(e) => changeCategory(e, null, null)}>create</MenuLink></Link>
+                ? <Link to="/create"><MenuLink>CREATE</MenuLink></Link>
                 : ""}
         </Flex>
     )
