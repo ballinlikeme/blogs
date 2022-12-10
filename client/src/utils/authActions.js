@@ -1,4 +1,4 @@
-const LOGIN = "Login";
-const REGISTER = "Register";
+const LOGIN = "/login";
+const REGISTER = "/register";
 
 export {LOGIN, REGISTER};

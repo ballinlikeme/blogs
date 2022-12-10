@@ -15,6 +15,7 @@ class UserService {
 
     async register(email, password, role) {
         const candidate = await User.findOne({where: {email}});
+        console.log(candidate);
         if (candidate) throw ApiError.BadRequest('User with this email already exists')
         const hashedPassword = await bcrypt.hash(password, 5);
         const user = await User.create({email, password: hashedPassword, role});
