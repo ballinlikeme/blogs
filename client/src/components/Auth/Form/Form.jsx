@@ -8,12 +8,15 @@ import {LOGIN, REGISTER} from "../../../utils/authActions";
 import {useState} from "react";
 import {useLocation} from "react-router";
 import authService from "../../../services/authService";
+import {Link} from "react-router-dom";
 
 const Form = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const location = useLocation();
     const action = location.pathname === LOGIN ? LOGIN : REGISTER;
+
+    const isLogin = location.pathname === LOGIN;
 
     const submit = async (event) => {
         event.preventDefault();
@@ -27,7 +30,7 @@ const Form = () => {
 
     return (
         <FormEl>
-            <FormTitle>{action === LOGIN ? "Login" : "Register"}</FormTitle>
+            <FormTitle>{isLogin ? "Login" : "Register"}</FormTitle>
             <Input
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -40,8 +43,8 @@ const Form = () => {
                 placeholder={"Password"}
                 type={"password"}
             />
-            <Button handler={submit}>{action === LOGIN ? "Login" : "Register"}</Button>
-            <Text>{action === LOGIN ? "Not a member? Register." : "Already have an account? Login."}</Text>
+            <Button handler={submit}>{isLogin ? "Login" : "Register"}</Button>
+            <Text>{isLogin ? `Not a member?` : "Already have an account?"} <Link to={isLogin ? "/register" : "/login"}>{isLogin ? "Register." : "Login."}</Link></Text>
         </FormEl>
     )
 }

@@ -4,6 +4,8 @@ import Flex from "../../styles/Flex";
 import {$host} from "../../../http/http";
 import {observer} from "mobx-react-lite";
 import categories from "../../../store/categories";
+import auth from "../../../store/auth";
+import {Link} from "react-router-dom";
 
 const Menu = observer(() => {
     const currentCategory = categories.currentCategory.name;
@@ -37,6 +39,9 @@ const Menu = observer(() => {
                         {category.name}
                     </MenuLink>
             })}
+            {auth.getUser()?.role === "ADMIN"
+                ? <Link to="/create"><MenuLink onClick={(e) => changeCategory(e, null, null)}>create</MenuLink></Link>
+                : ""}
         </Flex>
     )
 });

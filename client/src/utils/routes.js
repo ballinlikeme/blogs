@@ -1,6 +1,7 @@
 import SingleCategoryPage from "../pages/SingleCategoryPage";
 import SinglePostPage from "../pages/SinglePostPage";
 import AuthPage from "../pages/AuthPage";
+import CreatePage from "../pages/CreatePage";
 
 const PUBLIC_ROUTES = [
     {
@@ -28,8 +29,9 @@ const PUBLIC_ROUTES = [
 const PRIVATE_ROUTES = [
     {
         id: 1,
-        path: "/create"
+        path: "/create",
+        Element: <CreatePage />
     }
 ]
 
-export {PUBLIC_ROUTES};
+export {PUBLIC_ROUTES, PRIVATE_ROUTES};
