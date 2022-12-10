@@ -1,13 +1,13 @@
 import Header from "../components/Header/Header";
-import Auth from "../components/Auth/Auth"
+import Auth from "../components/Auth/Auth";
 
 const AuthPage = () => {
-    return (
-        <>
-            <Header />
-            <Auth />
-        </>
-    )
-}
+  return (
+    <>
+      <Header />
+      <Auth />
+    </>
+  );
+};
 
-export default AuthPage
+export default AuthPage;

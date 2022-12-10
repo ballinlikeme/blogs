@@ -1,4 +1,4 @@
 const LOGIN = "/login";
 const REGISTER = "/register";
 
-export {LOGIN, REGISTER};
+export { LOGIN, REGISTER };

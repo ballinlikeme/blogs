@@ -1,25 +1,23 @@
-import {makeAutoObservable} from "mobx";
+import { makeAutoObservable } from "mobx";
 
 class Categories {
+  categories = [];
+  currentCategory = {
+    name: "",
+    id: 0,
+  };
 
-    categories = [];
-    currentCategory = {
-        name: "",
-        id: 0,
-    };
+  constructor() {
+    makeAutoObservable(this);
+  }
 
-    constructor() {
-        makeAutoObservable(this);
-    }
+  setCategories(payload) {
+    this.categories = payload;
+  }
 
-    setCategories(payload) {
-        this.categories = payload;
-    }
-
-    setCurrentCategory(payload) {
-        this.currentCategory = payload;
-    }
-
+  setCurrentCategory(payload) {
+    this.currentCategory = payload;
+  }
 }
 
 export default new Categories();

@@ -14,22 +14,22 @@ const HeaderEl = styled.header`
   width: 100%;
   height: 70px;
   z-index: 10;
-`
+`;
 
 const Header = () => {
-    return (
-        <HeaderEl>
-            <Container>
-                <Flex justify={"space-between"} align={"center"}>
-                    <Flex align={"center"} gap={"30px"}>
-                        <Logo />
-                        <Menu />
-                    </Flex>
-                    <Controls />
-                </Flex>
-            </Container>
-        </HeaderEl>
-    )
-}
+  return (
+    <HeaderEl>
+      <Container>
+        <Flex justify={"space-between"} align={"center"}>
+          <Flex align={"center"} gap={"30px"}>
+            <Logo />
+            <Menu />
+          </Flex>
+          <Controls />
+        </Flex>
+      </Container>
+    </HeaderEl>
+  );
+};
 
 export default Header;

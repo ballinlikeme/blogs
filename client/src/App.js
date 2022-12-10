@@ -1,9 +1,7 @@
 import Init from "./components/Init";
 
 function App() {
-  return (
-   <Init />
-  );
+  return <Init />;
 }
 
 export default App;

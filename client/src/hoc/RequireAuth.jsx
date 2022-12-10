@@ -1,12 +1,12 @@
-import React from "react"
-import {observer} from "mobx-react-lite";
+import React from "react";
+import { observer } from "mobx-react-lite";
 import auth from "../store/auth";
 
-const RequireAuth = observer(({children}) => {
-    const isAuth = true;
+const RequireAuth = observer(({ children }) => {
+  const isAuth = true;
 
-    if (!isAuth) return <div>Unauthorized</div>
-    return children;
-})
+  if (!isAuth) return <div>Unauthorized</div>;
+  return children;
+});
 
 export default RequireAuth;
