@@ -39,7 +39,7 @@ const Menu = observer(() => {
             current={category.name === currentCategory}
             key={category.id}
           >
-            {category.name}
+            <Link to="/">{category.name}</Link>
           </MenuLink>
         );
       })}

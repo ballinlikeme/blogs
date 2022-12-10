@@ -6,8 +6,8 @@ const StyledText = styled.p`
   line-height: 200%;
 `;
 
-const Text = ({ children }) => {
-  return <StyledText>{children}</StyledText>;
+const Text = ({ text }) => {
+  return <StyledText>{text}</StyledText>;
 };
 
 export default Text;

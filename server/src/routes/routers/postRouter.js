@@ -1,10 +1,10 @@
-const Router = require('express');
+const Router = require("express");
 const postRouter = new Router();
-const postController = require('../../controllers/postController')
+const postController = require("../../controllers/postController");
 
-postRouter.get('/getOne', postController.getOne)
-postRouter.get('/getAll', postController.getAll)
-postRouter.post('/getPostsInCategory', postController.getPostsInCategory)
-postRouter.post('/create', postController.create)
+postRouter.post("/getOne", postController.getOne);
+postRouter.get("/getAll", postController.getAll);
+postRouter.post("/getPostsInCategory", postController.getPostsInCategory);
+postRouter.post("/create", postController.create);
 
 module.exports = postRouter;

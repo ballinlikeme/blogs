@@ -7,8 +7,8 @@ const StyledDescription = styled.p`
   margin-bottom: 25px;
 `;
 
-const Description = ({ children }) => {
-  return <StyledDescription>{children}</StyledDescription>;
+const Description = ({ description }) => {
+  return <StyledDescription>{description}</StyledDescription>;
 };
 
 export default Description;
