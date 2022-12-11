@@ -19,6 +19,11 @@ class PostService {
 
     return post;
   }
+
+  async createPost(title, text, author, description, UserId, CategoryId) {
+    const post = await $host.post("/posts/create", {title, text, author, description, UserId, CategoryId})
+    return post
+  }
 }
 
 export default new PostService();
