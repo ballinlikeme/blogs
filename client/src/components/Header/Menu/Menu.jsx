@@ -6,11 +6,14 @@ import categories from "../../../store/categories";
 import auth from "../../../store/auth";
 import { Link } from "react-router-dom";
 import categoryService from "../../../services/categoryService";
+import {useLocation} from "react-router";
 
 const Menu = observer(() => {
   const currentCategory = categories.currentCategory.name;
+  const location = useLocation()
 
   useEffect(() => {
+    if (location.pathname === "/create") return categories.setCurrentCategory({id: null, name: ''})
     categoryService.getAllCategories().then(res => {
       const sorted = res.sort((a, b) => a.name > b.name ? 1 : -1);
       const currentCategoryData = {
