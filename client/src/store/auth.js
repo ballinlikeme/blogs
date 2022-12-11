@@ -19,7 +19,7 @@ class Auth {
   logout() {
     this._auth = false;
     this._user = null;
-    localStorage.delete("token");
+    localStorage.removeItem("token");
   }
 
   authenticate(payload) {

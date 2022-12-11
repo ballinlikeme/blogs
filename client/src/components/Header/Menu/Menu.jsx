@@ -3,7 +3,6 @@ import MenuLink from "./MenuLink";
 import Flex from "../../styles/Flex";
 import { observer } from "mobx-react-lite";
 import categories from "../../../store/categories";
-import auth from "../../../store/auth";
 import { Link } from "react-router-dom";
 import categoryService from "../../../services/categoryService";
 import {useLocation} from "react-router";
@@ -43,13 +42,6 @@ const Menu = observer(() => {
           </MenuLink>
         );
       })}
-      {auth.getUser()?.role === "ADMIN" ? (
-        <Link to="/create">
-          <MenuLink>CREATE</MenuLink>
-        </Link>
-      ) : (
-        ""
-      )}
     </Flex>
   );
 });
