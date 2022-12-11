@@ -1,13 +1,15 @@
 import React, {useRef} from "react";
 import JoditEditor from "jodit-react";
+import Input from "../Input/Input";
 
-const PostEditor = ({id, value, setValue}) => {
+const PostEditor = ({id, content, setContent}) => {
     const editor = useRef(null)
 
     return (
+
             <JoditEditor
-                value={value}
-                onChange={newContent => setValue(newContent)}
+                value={content}
+                onChange={newContent => setContent(newContent)}
                 ref={editor}
                 id={id}
             />

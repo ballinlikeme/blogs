@@ -5,7 +5,7 @@ const StyledResultField = styled.div`
   margin-top: 60px;
 `
 
-const ResultField = ({content, title}) => {
+const Preview = ({content, title}) => {
     return (
         <>
             <Title>{title}</Title>
@@ -14,4 +14,4 @@ const ResultField = ({content, title}) => {
     )
 }
 
-export default ResultField;
+export default Preview;

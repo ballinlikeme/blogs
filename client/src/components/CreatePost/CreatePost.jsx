@@ -1,27 +1,50 @@
-import React, {useState} from "react"
+import {useState, useMemo} from "react"
+import categories from "../../store/categories";
 import PostEditor from "./Editor/PostEditor";
 import PageWrapper from "../styles/PageWrapper";
 import Container from "../styles/Container";
-import Label from "./Editor/Label";
-import Input from "./Editor/Input";
-import ResultField from "./Editor/ResultField";
+import Preview from "./Preview/Preview";
 import Flex from "../styles/Flex";
-import Button from "./Editor/Button";
+import TypeButton from "./TypeButton/TypeButton";
+import Input from "./Input/Input";
+import CategorySelector from "./CategorySelector/CategorySelector";
+import SubmitButton from "./SubmitButton/SubmitButton";
 
 const CreatePost = () => {
     const [content, setContent] = useState('')
-    const [title, setTitle] = useState('');
+    const [title, setTitle] = useState('')
+    const [type, setType] = useState('Editor')
+    const [category, setCategory] = useState('');
+
+    const memoizedContent = useMemo(() => content, [content])
+    const memoizedTitle = useMemo(() => title, [title])
+
+    if (type === "Preview") {
+        return (
+             <PageWrapper>
+                 <Container>
+                     <Flex align="center">
+                         <TypeButton cb={setType}>Editor</TypeButton>
+                         <TypeButton cb={setType}>Preview</TypeButton>
+                     </Flex>
+                     <Preview title={title} content={memoizedContent} />
+                 </Container>
+             </PageWrapper>
+        )
+    }
     return (
         <PageWrapper>
             <Container>
-                <Label htmlFor="1">Post Title</Label>
-                <Input handler={setTitle}  type="text" placeholder="Type here" id="1"/>
-                <Label htmlFor="2">Post Content</Label>
-                <PostEditor id="2" value={content} setValue={setContent} />
-                <Flex direction="row-reverse" margin="10px 0px">
-                    <Button>Create Post</Button>
+                <Flex align="center">
+                    <TypeButton cb={setType}>Editor</TypeButton>
+                    <TypeButton cb={setType}>Preview</TypeButton>
                 </Flex>
-                <ResultField content={content} title={title} />
+                <Input type="text" placeholder="Post title" cb={setTitle} value={memoizedTitle} />
+                <PostEditor id="2" content={memoizedContent} setContent={setContent} />
+                <Flex justify="space-between" margin="10px 0px">
+                    <CategorySelector setCategory={setCategory} />
+                    <SubmitButton />
+                </Flex>
             </Container>
         </PageWrapper>
     )
