@@ -6,20 +6,24 @@ const StyledMenuLink = styled.a.attrs({
 })`
   font-weight: var(--light-font);
   font-size: var(--regular-text-size);
+  transition: color .3s ease-in;
+  position: relative;
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 0;
+    transition: width .3s ease-in;
+    background-color: var(--help-color);
+  }
   ${(props) =>
     props.current &&
     css`
       font-weight: var(--semibold-font);
-      position: relative;
-
       &:after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -4px;
-        height: 2px;
         width: 100%;
-        background-color: var(--help-color);
       }
     `}
 `;
