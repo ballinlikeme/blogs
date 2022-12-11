@@ -1,28 +1,25 @@
 import React, { useEffect } from "react";
 import MenuLink from "./MenuLink";
 import Flex from "../../styles/Flex";
-import { $host } from "../../../http/http";
 import { observer } from "mobx-react-lite";
 import categories from "../../../store/categories";
 import auth from "../../../store/auth";
 import { Link } from "react-router-dom";
+import categoryService from "../../../services/categoryService";
 
 const Menu = observer(() => {
   const currentCategory = categories.currentCategory.name;
 
   useEffect(() => {
-    $host.get("/categories/getAll").then((result) => {
-      const categoriesData = Array.from(result.data);
-      const sortedCategoriesData = categoriesData.sort((a, b) =>
-        a.name > b.name ? 1 : -1
-      );
-      const currentCategoryPayload = {
-        id: sortedCategoriesData[0].id,
-        name: sortedCategoriesData[0].name,
-      };
-      categories.setCategories(sortedCategoriesData);
-      categories.setCurrentCategory(currentCategoryPayload);
-    });
+    categoryService.getAllCategories().then(res => {
+      const sorted = res.sort((a, b) => a.name > b.name ? 1 : -1);
+      const currentCategoryData = {
+        id: sorted[0].id,
+        name: sorted[0].name,
+      }
+      categories.setCategories(sorted);
+      categories.setCurrentCategory(currentCategoryData);
+    })
   }, []);
 
   const changeCategory = (event, name, id) => {
