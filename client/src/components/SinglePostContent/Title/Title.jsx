@@ -5,8 +5,8 @@ const StyledTitle = styled.h1`
   margin-bottom: 50px;
 `;
 
-const Title = ({ title }) => {
-  return <StyledTitle>{title}</StyledTitle>;
+const Title = ({ children, title }) => {
+  return <StyledTitle>{children ? children : title}</StyledTitle>;
 };
 
 export default Title;
