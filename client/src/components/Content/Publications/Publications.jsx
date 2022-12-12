@@ -7,7 +7,7 @@ const Publications = ({ publications }) => {
     <Grid>
       {publications.map((publication) => {
         return (
-          <Link to={`/post/${publication.id}`}>
+          <Link key={publication.id} to={`/post/${publication.id}`}>
             <PostTile
               title={publication.title}
               description={publication.description}
