@@ -15,8 +15,13 @@ const StyledEditorButton = styled.button`
     `}
 `
 
-const EditorButton = ({children, cb, check}) => {
-    return <StyledEditorButton onClick={() => cb()}>{children}</StyledEditorButton>
+const EditorButton = ({label, onClick, active, style}) => {
+    const onClickCustom = (e) => {
+        e.preventDefault()
+        onClick(style);
+    }
+
+    return <StyledEditorButton active={active} onClick={onClickCustom}>{label}</StyledEditorButton>
 }
 
 export default EditorButton;

@@ -1,20 +1,18 @@
 import { Editor, RichUtils } from "draft-js";
-import {convertToHTML} from "draft-convert";
-import EditorButton from "./EditorButton";
 import EditorWrapper from "./EditorWrapper";
 import PanelWrapper from "../PanelWrapper";
 import Flex from "../../styles/Flex";
 import "draft-js/dist/Draft.css";
 import "../../../css/editor.css";
 import blockRenderer from "../../../utils/blockRenderer";
-import customConvert from "../../../utils/customConvert";
+import BlockStyleControls from "./Controls/BlockStyleControls";
+import InlineStyleControls from "./Controls/InlineStyleControls";
+import styleMap from "../../../utils/styleMap";
+import EditorRoot from "./EditorRoot";
 
 const DEditor = ({value, placeholder, setValue}) => {
 
-    const currentStyle = (param) => {
-        console.log(value.getCurrentInlineStyle().has(param));
-        return value.getCurrentInlineStyle().has(param)
-    }
+    const {toggleBlockType, toggleInlineStyle} = RichUtils;
 
     const handleKeyCommand = (command, editorState) => {
         const newState = RichUtils.handleKeyCommand(value, command);
@@ -27,63 +25,34 @@ const DEditor = ({value, placeholder, setValue}) => {
         return 'not-handled';
     }
 
-    const onBoldClick = () => {
-        setValue(RichUtils.toggleInlineStyle(value, "BOLD"))
+    const customClickBlockType = (blockType) => {
+        const newValue = toggleBlockType(value, blockType)
+        setValue(value => newValue)
     }
 
-    const onItalicClick = () => {
-        setValue(RichUtils.toggleInlineStyle(value, "ITALIC"))   
-    }
-
-    const onHeadingTwoClick = () => {
-        setValue(RichUtils.toggleBlockType(value, "header-two"))
-    }
-
-    const onHeadingThreeClick = () => {
-        setValue(RichUtils.toggleBlockType(value, "header-three"))
-    }
-
-    const onBlockQuoteClick = () => {
-        setValue(RichUtils.toggleBlockType(value, "blockquote"))
-    }
-
-    const onUnorderedListItemClick = () => {
-        setValue(RichUtils.toggleBlockType(value, "unordered-list-item"));
-    }
-
-    const onOrderedListItemClick = () => {
-        setValue(RichUtils.toggleBlockType(value, "ordered-list-item"));
-    }
-
-    const onCodeBlockClick = () => {
-        setValue(RichUtils.toggleBlockType(value, "code-block"));
-    }
-
-    const onBrClick = () => {
-        setValue(RichUtils.toggleBlockType(value, "br"));
+    const customClickInlineStyle = (blockType) => {
+        const newValue = toggleInlineStyle(value, blockType)
+        setValue(value => newValue);
     }
 
     return (
         <PanelWrapper>
             <EditorWrapper>
-                <Flex gap={"10px"}>
-                    <EditorButton cb={onBoldClick}>Bold</EditorButton>
-                    <EditorButton cb={onItalicClick}>Italic</EditorButton>
-                    <EditorButton cb={onHeadingTwoClick}>H2</EditorButton>
-                    <EditorButton cb={onHeadingThreeClick}>H3</EditorButton>
-                    <EditorButton cb={onBlockQuoteClick}>Blockquote</EditorButton>
-                    <EditorButton cb={onUnorderedListItemClick}>UL</EditorButton>
-                    <EditorButton cb={onOrderedListItemClick}>OL</EditorButton>
-                    <EditorButton cb={onCodeBlockClick}>Code Block</EditorButton>
-                    <EditorButton cb={onBrClick}>Br</EditorButton>
+                <Flex direction="column" margin="0px 0px 20px">
+                    <BlockStyleControls editorState={value} onClick={customClickBlockType}/>
+                    <InlineStyleControls editorState={value} onClick={customClickInlineStyle} />
                 </Flex>
-                <Editor 
-                    placeholder={placeholder}
-                    handleKeyCommand={handleKeyCommand} 
-                    editorState={value} 
-                    onChange={setValue} 
-                    blockRendererFn={blockRenderer}
-                />
+                <EditorRoot>
+                    <Editor
+                        placeholder={placeholder}
+                        handleKeyCommand={handleKeyCommand}
+                        editorState={value}
+                        onChange={setValue}
+                        blockRendererFn={blockRenderer}
+                        customStyleMap={styleMap}
+                        spellCheck={true}
+                    />
+                </EditorRoot>
             </EditorWrapper>
         </PanelWrapper>
     )
