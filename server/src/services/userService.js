@@ -23,7 +23,11 @@ class UserService {
       throw ApiError.BadRequest("User with this email already exists");
     const hashedPassword = await bcrypt.hash(password, 5);
     const user = await User.create({ email, password: hashedPassword, role });
-    const token = tokenService.generateAccessToken(email, user.id, user.role);
+    const token = tokenController.generateAccessToken(
+      email,
+      user.id,
+      user.role
+    );
     const userData = { id: user.id, email: user.email, role: user.role, token };
     return userData;
   }
