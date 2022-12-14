@@ -7,15 +7,17 @@ import Preview from "./Preview";
 import {EditorState} from "draft-js"
 import {useState, useMemo} from "react"
 import customConvert from "../../utils/customConvert";
+import DescriptionEditor from "./DescriptionEditor";
 
 const AdminPanel = () => {
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty())
     const [title, setTitle] = useState('');
+    const [description, setDescription] = useState('');
     const [type, setType] = useState("Editor");
 
     const memoizedEditorState = useMemo(() => customConvert(editorState), [editorState]);
-
     const memoizedTitle = useMemo(() => title, [title]);
+    const memoizedDescription = useMemo(() => description, [description]);
 
     if (type === "Editor") {
         return (
@@ -23,6 +25,7 @@ const AdminPanel = () => {
                 <Container width={"500px"}>
                     <Controls cb={setType} />
                     <TitleEditor placeholder={"Title"} value={title} cb={setTitle}  />
+                    <DescriptionEditor placeholder="Description" value={memoizedDescription} cb={setDescription} />
                     <DEditor setValue={setEditorState} value={editorState} />
                 </Container>
             </PageWrapper>
@@ -33,7 +36,7 @@ const AdminPanel = () => {
         <PageWrapper>
             <Container width="500px">
                 <Controls cb={setType} />
-                <Preview title={memoizedTitle} content={memoizedEditorState} />
+                <Preview title={memoizedTitle} description={memoizedDescription} content={memoizedEditorState} />
             </Container>
         </PageWrapper>
     )

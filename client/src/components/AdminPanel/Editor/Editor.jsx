@@ -85,7 +85,6 @@ const DEditor = ({value, placeholder, setValue}) => {
                     blockRendererFn={blockRenderer}
                 />
             </EditorWrapper>
-            {customConvert(value)}
         </PanelWrapper>
     )
 }

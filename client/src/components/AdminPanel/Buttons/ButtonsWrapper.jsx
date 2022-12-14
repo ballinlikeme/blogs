@@ -5,6 +5,7 @@ const StyledButtonsWrapper = styled.div`
     border: 1px solid black;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    border-bottom: none;
 `
 
 const ButtonsWrapper = ({children}) => {
