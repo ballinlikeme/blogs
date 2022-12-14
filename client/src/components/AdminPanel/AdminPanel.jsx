@@ -6,18 +6,14 @@ import TitleEditor from "./TitleEditor";
 import Preview from "./Preview";
 import {EditorState} from "draft-js"
 import {useState, useMemo} from "react"
-import { convertToHTML } from "draft-convert";
+import customConvert from "../../utils/customConvert";
 
 const AdminPanel = () => {
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty())
     const [title, setTitle] = useState('');
     const [type, setType] = useState("Editor");
 
-    const memoizedEditorState = useMemo(() => convertToHTML({
-        blockToHTML: (block) => {
-            if (block.type === "br") return <br />
-        },
-    })(editorState.getCurrentContent()), [editorState]);
+    const memoizedEditorState = useMemo(() => customConvert(editorState), [editorState]);
 
     const memoizedTitle = useMemo(() => title, [title]);
 

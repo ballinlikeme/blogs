@@ -7,6 +7,7 @@ import Flex from "../../styles/Flex";
 import "draft-js/dist/Draft.css";
 import "../../../css/editor.css";
 import blockRenderer from "../../../utils/blockRenderer";
+import customConvert from "../../../utils/customConvert";
 
 const DEditor = ({value, placeholder, setValue}) => {
 
@@ -70,7 +71,7 @@ const DEditor = ({value, placeholder, setValue}) => {
                     <EditorButton cb={onItalicClick}>Italic</EditorButton>
                     <EditorButton cb={onHeadingTwoClick}>H2</EditorButton>
                     <EditorButton cb={onHeadingThreeClick}>H3</EditorButton>
-                    <EditorButton cb={onBlockQuoteClick}>Blockqoute</EditorButton>
+                    <EditorButton cb={onBlockQuoteClick}>Blockquote</EditorButton>
                     <EditorButton cb={onUnorderedListItemClick}>UL</EditorButton>
                     <EditorButton cb={onOrderedListItemClick}>OL</EditorButton>
                     <EditorButton cb={onCodeBlockClick}>Code Block</EditorButton>
@@ -84,11 +85,7 @@ const DEditor = ({value, placeholder, setValue}) => {
                     blockRendererFn={blockRenderer}
                 />
             </EditorWrapper>
-            {convertToHTML({
-                blockToHTML: (block) => {
-                    if (block.type === "br") return <br />
-                }
-            })(value.getCurrentContent())}
+            {customConvert(value)}
         </PanelWrapper>
     )
 }
