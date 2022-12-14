@@ -10,6 +10,11 @@ import blockRenderer from "../../../utils/blockRenderer";
 
 const DEditor = ({value, placeholder, setValue}) => {
 
+    const currentStyle = (param) => {
+        console.log(value.getCurrentInlineStyle().has(param));
+        return value.getCurrentInlineStyle().has(param)
+    }
+
     const handleKeyCommand = (command, editorState) => {
         const newState = RichUtils.handleKeyCommand(value, command);
     
@@ -26,8 +31,7 @@ const DEditor = ({value, placeholder, setValue}) => {
     }
 
     const onItalicClick = () => {
-        console.log(value.getCurrentInlineStyle().has("ITALIC"))
-        
+        setValue(RichUtils.toggleInlineStyle(value, "ITALIC"))   
     }
 
     const onHeadingTwoClick = () => {
