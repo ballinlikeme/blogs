@@ -7,7 +7,7 @@ const StyledText = styled.p`
 `;
 
 const Text = ({ text }) => {
-  return <StyledText>{text}</StyledText>;
+  return <StyledText dangerouslySetInnerHTML={{__html: text}} />
 };
 
 export default Text;
