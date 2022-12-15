@@ -23,8 +23,11 @@ class Auth {
   }
 
   authenticate(payload) {
+    const {id, role, email} = payload;
     this._auth = true;
-    this._user = payload;
+    this._user = {
+      id, role, email
+    };
     console.log(payload);
   }
 }

@@ -11,6 +11,11 @@ class Categories {
     makeAutoObservable(this);
   }
 
+  getCategory(name) {
+    const category = this.categories.filter(category => category.name === name);
+    return category;
+  }
+
   setCategories(payload) {
     this.categories = payload;
   }

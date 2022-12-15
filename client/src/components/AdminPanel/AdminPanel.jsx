@@ -5,19 +5,45 @@ import Controls from "./Buttons/Controls";
 import TitleEditor from "./TitleEditor";
 import Preview from "./Preview";
 import {EditorState} from "draft-js"
-import {useState, useMemo} from "react"
+import {useState, useMemo, useEffect} from "react"
 import customConvert from "../../utils/customConvert";
 import DescriptionEditor from "./DescriptionEditor";
+import Flex from "../styles/Flex";
+import CategorySelector from "./Editor/CategorySelector/CategorySelector";
+import SubmitButton from "./Editor/SubmitButton";
+import postService from "../../services/postService";
+import auth from "../../store/auth";
+import categories from "../../store/categories";
+import {observer} from "mobx-react-lite";
 
-const AdminPanel = () => {
+const AdminPanel = observer(() => {
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty())
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [type, setType] = useState("Editor");
+    const [categoryId, setCategoryId] = useState(null);
 
     const memoizedEditorState = useMemo(() => customConvert(editorState), [editorState]);
     const memoizedTitle = useMemo(() => title, [title]);
     const memoizedDescription = useMemo(() => description, [description]);
+
+    const user = auth.getUser();
+
+    useEffect(() => {
+        console.log(categoryId)
+    }, [categoryId])
+
+    const submit = async () => {
+        const newPost = await postService.createPost(
+            memoizedTitle,
+            memoizedEditorState,
+            "ROOT",
+            memoizedDescription,
+            user.id,
+            categoryId
+        )
+        return newPost
+    }
 
     if (type === "Editor") {
         return (
@@ -27,6 +53,10 @@ const AdminPanel = () => {
                     <TitleEditor placeholder={"Title"} value={title} cb={setTitle}  />
                     <DescriptionEditor placeholder="Description" value={memoizedDescription} cb={setDescription} />
                     <DEditor setValue={setEditorState} value={editorState} />
+                    <Flex justify="space-between" margin="10px 0 0" align="flex-end">
+                        <CategorySelector cb={setCategoryId} />
+                        <SubmitButton cb={submit}>Create</SubmitButton>
+                    </Flex>
                 </Container>
             </PageWrapper>
         )
@@ -40,8 +70,6 @@ const AdminPanel = () => {
             </Container>
         </PageWrapper>
     )
-
-    
-}
+})
 
 export default AdminPanel;
