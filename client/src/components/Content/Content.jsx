@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Container from "../styles/Container";
-import PageWrapper from "../styles/PageWrapper";
 import HeadLine from "./HeadLine/HeadLine";
 import Publications from "./Publications/Publications";
 import categories from "../../store/categories";
 import { $host } from "../../http/http";
 import { observer } from "mobx-react-lite";
 import postService from "../../services/postService";
+import Layout from "../Layout/Layout";
 
 const Content = observer(() => {
   const [amount, setAmount] = useState(0);
@@ -22,12 +21,10 @@ const Content = observer(() => {
   }, [categoryId]);
 
   return (
-    <PageWrapper>
-      <Container>
-        <HeadLine amount={amount} />
-        <Publications publications={publications} />
-      </Container>
-    </PageWrapper>
+    <Layout>
+      <HeadLine amount={amount} />
+      <Publications publications={publications} />
+    </Layout>
   );
 });
 

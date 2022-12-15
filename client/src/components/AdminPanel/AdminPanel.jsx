@@ -1,5 +1,4 @@
-import PageWrapper from "../styles/PageWrapper";
-import Container from "../styles/Container";
+import Layout from "../Layout/Layout";
 import DEditor from "./Editor/Editor";
 import Controls from "./Buttons/Controls";
 import TitleEditor from "./TitleEditor";
@@ -47,28 +46,24 @@ const AdminPanel = observer(() => {
 
     if (type === "Editor") {
         return (
-            <PageWrapper>
-                <Container width={"500px"}>
-                    <Controls cb={setType} />
-                    <TitleEditor placeholder={"Title"} value={title} cb={setTitle}  />
-                    <DescriptionEditor placeholder="Description" value={memoizedDescription} cb={setDescription} />
-                    <DEditor setValue={setEditorState} value={editorState} />
-                    <Flex justify="space-between" margin="10px 0 0" align="flex-end">
-                        <CategorySelector cb={setCategoryId} />
-                        <SubmitButton cb={submit}>Create</SubmitButton>
-                    </Flex>
-                </Container>
-            </PageWrapper>
+            <Layout>
+                <Controls cb={setType} />
+                <TitleEditor placeholder={"Title"} value={title} cb={setTitle}  />
+                <DescriptionEditor placeholder="Description" value={memoizedDescription} cb={setDescription} />
+                <DEditor setValue={setEditorState} value={editorState} />
+                <Flex justify="space-between" margin="10px 0 0" align="flex-end">
+                    <CategorySelector cb={setCategoryId} />
+                    <SubmitButton cb={submit}>Create</SubmitButton>
+                </Flex>
+            </Layout>
         )
     }
 
     return (
-        <PageWrapper>
-            <Container width="500px">
-                <Controls cb={setType} />
-                <Preview title={memoizedTitle} description={memoizedDescription} content={memoizedEditorState} />
-            </Container>
-        </PageWrapper>
+        <Layout>
+            <Controls cb={setType} />
+            <Preview title={memoizedTitle} description={memoizedDescription} content={memoizedEditorState} />
+        </Layout>
     )
 })
 
