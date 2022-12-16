@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled, {css} from "styled-components"
 
 const StyledInput = styled.input`
   width: 100%;
@@ -17,6 +17,9 @@ const StyledInput = styled.input`
   &:focus {
     border-bottom-color: var(--accent-color);
   }
+  ${(props) => props.error && css`
+    border-bottom-color: var(--help-color) !important;
+  `}
 `
 
 const StyledInputContainer = styled.div`
@@ -26,10 +29,10 @@ const StyledInputContainer = styled.div`
   }
 `
 
-const Input = ({placeholder, type, value, handler}) => {
+const Input = ({placeholder, type, value, handler, error}) => {
     return (
         <StyledInputContainer>
-            <StyledInput value={value} onChange={e => handler(e.target.value)} type={type} placeholder={placeholder} />
+            <StyledInput error={error} value={value} onChange={e => handler(e.target.value)} type={type} placeholder={placeholder} />
         </StyledInputContainer>
     )
 }
