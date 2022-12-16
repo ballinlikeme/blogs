@@ -38,8 +38,6 @@ const Form = () => {
         } catch (e) {
             const errorMessage = e.response.data.message
             authErrorHandler(errorMessage, setEmailError, setPassError);
-            console.log(emailError);
-            console.log(passError);
         }
 
     }
