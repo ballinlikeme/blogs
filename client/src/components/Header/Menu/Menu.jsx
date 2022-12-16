@@ -14,6 +14,7 @@ const Menu = observer(() => {
   useEffect(() => {
     categoryService.getAllCategories().then(res => {
       const cats = [];
+      categories.setCategories(res);
       res.forEach(async category => {
         const { data } = await postService.getPostsInCategory(category.id);
         if (data.length > 0) cats.push(category);
