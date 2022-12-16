@@ -14,6 +14,7 @@ import postService from "../../services/postService";
 import auth from "../../store/auth";
 import categories from "../../store/categories";
 import {observer} from "mobx-react-lite";
+import CategoryCreator from "./CategoryCreator/CategoryCreator";
 
 const AdminPanel = observer(() => {
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty())
@@ -29,18 +30,21 @@ const AdminPanel = observer(() => {
     const user = auth.getUser();
 
     useEffect(() => {
-        console.log(categoryId)
+        categories.setCurrentCategory({name: '', id: null})
     }, [categoryId])
 
     const submit = async () => {
         const newPost = await postService.createPost(
             memoizedTitle,
             memoizedEditorState,
-            "ROOT",
+            user.email,
             memoizedDescription,
             user.id,
             categoryId
         )
+        setEditorState(() => EditorState.createEmpty())
+        setTitle('')
+        setDescription('')
         return newPost
     }
 
@@ -55,6 +59,7 @@ const AdminPanel = observer(() => {
                     <CategorySelector cb={setCategoryId} />
                     <SubmitButton cb={submit}>Create</SubmitButton>
                 </Flex>
+                <CategoryCreator />
             </Layout>
         )
     }
