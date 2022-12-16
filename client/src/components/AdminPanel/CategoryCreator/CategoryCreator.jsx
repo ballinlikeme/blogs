@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 import SubmitButton from "../Editor/SubmitButton";
 import categoryService from "../../../services/categoryService";
 import {useState} from "react";
@@ -19,21 +19,34 @@ const StyledInput = styled.input`
   &::placeholder {
     color: var(--color-text);
   }
+  ${props => props.error && css`
+    border-color: var(--help-color);
+  `}
 `
 
 const CategoryCreator = () => {
     const [name, setName] = useState('');
+    const [error, setError] = useState(false);
+
+    const handleChange = (event) => {
+        setName(event.target.value);
+        setError(false);
+    }
 
     const create = async () => {
-        await categoryService.createCategory(name);
-        setName('');
+        try {
+            await categoryService.createCategory(name);
+            setName('');
+        } catch (e) {
+            setError(true)
+        }
     }
 
     return (
         <>
             <StyledTitle>Create Category</StyledTitle>
             <Flex gap="5px">
-                <StyledInput value={name} onChange={e => setName(e.target.value)} placeholder="Name" />
+                <StyledInput error={error} value={name} onChange={handleChange} placeholder="Name" />
                 <SubmitButton cb={create}>Create</SubmitButton>
             </Flex>
         </>
