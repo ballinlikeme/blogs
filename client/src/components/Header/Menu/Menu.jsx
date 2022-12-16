@@ -1,18 +1,24 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useState} from "react";
 import MenuLink from "./MenuLink";
 import Flex from "../../styles/Flex";
 import { observer } from "mobx-react-lite";
 import categories from "../../../store/categories";
 import { Link } from "react-router-dom";
 import categoryService from "../../../services/categoryService";
+import postService from "../../../services/postService";
 
 const Menu = observer(() => {
   const currentCategory = categories.currentCategory.name;
+  const [categoriesInMenu, setCategoriesInMenu] = useState([]);
 
   useEffect(() => {
     categoryService.getAllCategories().then(res => {
-      const sorted = res.sort((a, b) => a.name > b.name ? 1 : -1);
-      categories.setCategories(sorted);
+      const cats = [];
+      res.forEach(async category => {
+        const { data } = await postService.getPostsInCategory(category.id);
+        if (data.length > 0) cats.push(category);
+        setCategoriesInMenu(cats);
+      })
     })
   }, []);
 
@@ -23,7 +29,7 @@ const Menu = observer(() => {
 
   return (
     <Flex align={"center"} gap={"20px"}>
-      {categories.categories.map((category) => {
+      {categoriesInMenu.map((category) => {
         return (
           <MenuLink
             onClick={(e) => changeCategory(e, category.name, category.id)}
