@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 const StyledDescriptionEditor = styled.textarea`
   width: 100%;
@@ -16,10 +16,13 @@ const StyledDescriptionEditor = styled.textarea`
   &:focus {
     outline: none;
   }
+  ${props => props.error && css`
+    border: 1px solid var(--help-color);
+  `}
 `;
 
-const DescriptionEditor = ({ cb, value, placeholder }) => {
-    return <StyledDescriptionEditor placeholder={placeholder} value={value} onChange={e => cb(e.target.value)} />
+const DescriptionEditor = ({ cb, value, placeholder, error }) => {
+    return <StyledDescriptionEditor error={error} placeholder={placeholder} value={value} onChange={e => cb(e.target.value)} />
 }
 
 export default DescriptionEditor

@@ -10,7 +10,7 @@ import InlineStyleControls from "./Controls/InlineStyleControls";
 import styleMap from "../../../utils/styleMap";
 import EditorRoot from "./EditorRoot";
 
-const DEditor = ({value, placeholder, setValue}) => {
+const DEditor = ({value, placeholder, setValue, error}) => {
 
     const {toggleBlockType, toggleInlineStyle} = RichUtils;
 
@@ -36,7 +36,7 @@ const DEditor = ({value, placeholder, setValue}) => {
     }
 
     return (
-        <PanelWrapper>
+        <PanelWrapper error={error}>
             <EditorWrapper>
                 <Flex direction="column" margin="0px 0px 20px">
                     <BlockStyleControls editorState={value} onClick={customClickBlockType}/>

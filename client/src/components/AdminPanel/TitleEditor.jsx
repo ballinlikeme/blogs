@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 const StyledTitleEditor = styled.input`
   width: 100%;
@@ -11,11 +11,15 @@ const StyledTitleEditor = styled.input`
     font-size: var(--regular-text-size);
     color: var(--color-text);
   }
+  ${props => props.error && css`
+    border-color: var(--help-color);
+  `}
 `;
 
-const TitleEditor = ({ cb, placeholder, value }) => {
+const TitleEditor = ({ cb, placeholder, value, error }) => {
   return (
     <StyledTitleEditor
+      error={error}
       value={value}
       placeholder={placeholder}
       onChange={(e) => cb(e.target.value)}
