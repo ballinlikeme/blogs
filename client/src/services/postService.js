@@ -1,6 +1,13 @@
 import { $host } from "../http/http";
 
 class PostService {
+
+  async getAll() {
+    const posts = await $host.get("/posts/getAll")
+      .then(result => result)
+    return posts;
+  }
+
   async getPostsInCategory(categoryId) {
     const posts = await $host
       .post("/posts/getPostsInCategory", {

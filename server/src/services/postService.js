@@ -1,4 +1,5 @@
 const Posts = require('../database/models/posts');
+const ApiError = require('../exceptions/apiError')
 
 class PostService {
     async getAll() {
